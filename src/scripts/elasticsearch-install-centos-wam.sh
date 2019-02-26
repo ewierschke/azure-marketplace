@@ -1257,7 +1257,7 @@ firewall_ports()
     log "[firewall_ports] starting and enabling firewalld"
     systemctl start firewalld.service
     systemctl enable firewalld.service
-    if [ ${CLIENT_ONLY_NODE} -eq 0 ]; then
+    if [ ${DATA_ONLY_NODE} -ne 1 ]; then
         log "[firewall_ports] setting up firewall ports for data nodes"
         firewall-cmd --zone=public --permanent --add-port=9300/tcp
         firewall-cmd --zone=public --add-port=9300/tcp
