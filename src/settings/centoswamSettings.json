@@ -100,7 +100,7 @@
       "[concat(parameters('templateBaseUrl'), 'scripts/logstash-install-centos.sh')]",
       "[concat(parameters('templateBaseUrl'), 'scripts/vm-disk-utils-0.1.sh')]",
       "[concat(parameters('templateBaseUrl'), 'scripts/java-install-centos.sh')]",
-      "[concat(parameters('templateBaseUrl'), 'scripts/watchmaker-centos.sh')]"
+      "[concat(parameters('templateBaseUrl'), 'scripts/jumpbox-centos-wam.sh')]"
     ],
     "centosSettings": {
       "imageReference": {
