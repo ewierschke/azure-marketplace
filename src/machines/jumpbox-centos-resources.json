@@ -183,7 +183,8 @@
               "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('nicName'))]"
             }
           ]
-        },
+        }
+    },
         "resources": [
           {
             "type": "Microsoft.Compute/virtualMachines/extensions",
@@ -197,7 +198,6 @@
           }
         ]
       }
-    }
   ],
   "outputs": {
     "ssh": {
