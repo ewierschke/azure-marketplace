@@ -50,7 +50,7 @@
   },
   "variables": {
     "namespace": "[parameters('namespace')]",
-    "vmSize": "Standard_A0",
+    "vmSize": "Standard_DS2_v2",
     "subnetRef": "[concat(resourceId(parameters('networkSettings').resourceGroup, 'Microsoft.Network/virtualNetworks', parameters('networkSettings').name), '/subnets/', parameters('networkSettings').subnet.name)]",
     "publicIpName": "[concat(variables('namespace'), '-ip')]",
     "securityGroupName": "[concat(variables('namespace'), '-nsg')]",
