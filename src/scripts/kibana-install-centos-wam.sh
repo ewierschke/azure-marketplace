@@ -152,10 +152,10 @@ install_kibana()
 {
     local PACKAGE="kibana-$KIBANA_VERSION-x86_64.rpm"
     local ALGORITHM="512"
-#Removing check because will always be above 6
-#    if dpkg --compare-versions "$KIBANA_VERSION" "lt" "5.6.2"; then
-#      ALGORITHM="1"
-#    fi
+    #Removing check because will always be above 6
+    #if dpkg --compare-versions "$KIBANA_VERSION" "lt" "5.6.2"; then
+    #  ALGORITHM="1"
+    #fi
 
     local SHASUM="$PACKAGE.sha$ALGORITHM"
     local DOWNLOAD_URL="https://artifacts.elastic.co/downloads/kibana/$PACKAGE?ultron=msft&gambit=azure"

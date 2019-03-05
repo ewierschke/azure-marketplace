@@ -15,9 +15,17 @@ watchmaker_hardening()
 {
     log "[watchmaker_hardening] running watchmaker for hardening"
     yum -y install epel-release 
+    # Install pip
     yum -y --enablerepo=epel install python-pip wget 
-    pip install --upgrade pip setuptools watchmaker 
-    watchmaker -n --log-level debug --log-dir=/var/log/watchmaker --config=/usr/lib/python2.7/site-packages/watchmaker/static/config.yaml
+    # Install setup dependencies for python 2.x
+    pip install --upgrade "pip<10" "wheel<0.30.0" "setuptools<37"
+    # Install Watchmaker
+    pip install --upgrade watchmaker 
+    # Setup terminal support for UTF-8
+    export LC_ALL=en_US.UTF-8
+    export LANG=en_US.UTF-8
+    # Run Watchmaker
+    watchmaker --no-reboot --log-level debug --log-dir=/var/log/watchmaker --config=/usr/lib/python2.7/site-packages/watchmaker/static/config.yaml
     log "[watchmaker_hardening] disabling fips mode for azure linux agent and extensions"
     salt-call --local ash.fips_disable
 }
