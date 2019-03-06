@@ -8,12 +8,6 @@
             "description": "The base url for templates"
         }
     },
-    "customwamcontentBaseUrl": {
-        "type": "string",
-        "metadata": {
-            "description": "The base url containing content for custom wam"
-        }
-    },
     "esSettings": {
         "type": "object",
         "metadata": {
@@ -120,9 +114,7 @@
       "[concat(parameters('templateBaseUrl'), 'scripts/logstash-install-centos.sh')]",
       "[concat(parameters('templateBaseUrl'), 'scripts/vm-disk-utils-0.1.sh')]",
       "[concat(parameters('templateBaseUrl'), 'scripts/java-install-centos.sh')]",
-      "[concat(parameters('templateBaseUrl'), 'scripts/jumpbox-centos-wam.sh')]",
-      "[concat(parameters('customwamcontentBaseUrl'), 'customwam/config.yaml')]",
-      "[concat(parameters('customwamcontentBaseUrl'), 'customwam/salt-content.zip')]"
+      "[concat(parameters('templateBaseUrl'), 'scripts/jumpbox-centos-wam.sh')]"
     ],
     "centosSettings": {
       "imageReference": {

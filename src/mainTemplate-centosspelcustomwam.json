@@ -9,12 +9,6 @@
         "artifactsBaseUrl": "Base URL of the Elastic template gallery package"
       }
     },
-    "customwamcontentBaseUrl": {
-        "type": "string",
-        "metadata": {
-            "description": "The base url containing content for custom wam"
-        }
-    },
     "elasticTags": {
       "type": "object",
       "defaultValue": {
@@ -2052,9 +2046,6 @@
         "parameters": {
           "templateBaseUrl": {
             "value": "[variables('templateBaseUrl')]"
-          },
-          "customwamcontentBaseUrl": {
-            "value": "[parameters('customwamcontentBaseUrl')]"
           },
           "esSettings": {
             "value": "[variables('esSettings')]"
