@@ -1364,15 +1364,15 @@ firewall_ports
 
 start_systemd
 
-watchmaker_hardening
-
-update_and_reboot_in_2_min
-
 # patch roles and users through the REST API which is a tad trickier
 if [[ ${INSTALL_XPACK} -ne 0 ]]; then
   wait_for_started
   apply_security_settings
 fi
+
+watchmaker_hardening
+
+update_and_reboot_in_2_min
 
 ELAPSED_TIME=$(($SECONDS - $START_TIME))
 PRETTY=$(printf '%dh:%dm:%ds\n' $(($ELAPSED_TIME/3600)) $(($ELAPSED_TIME%3600/60)) $(($ELAPSED_TIME%60)))
