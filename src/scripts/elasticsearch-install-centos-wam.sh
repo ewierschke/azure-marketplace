@@ -1281,6 +1281,15 @@ watchmaker_hardening()
     salt-call --local ash.fips_disable
 }
 
+jvm_tmp_adjust()
+{
+    #watchmaker adds noexec to /tmp requiring new jvm tmpdir location
+    #https://www.elastic.co/guide/en/elasticsearch/reference/6.6/setup-configuration-memory.html#bootstrap-memory_lock
+    mkdir /var/jvmtmp
+    chown elasticsearch:elasticsearch /var/jvmtmp
+    sed -i_bak -e "s|-Djava.io.tmpdir.*|-Djava.io.tmpdir=/var/jvmtmp|" /etc/elasticsearch/jvm.options
+}
+
 update_and_reboot_in_2_min()
 {
     log "[update_and_reboot_in_2_min] prep for yum update"
@@ -1371,6 +1380,8 @@ if [[ ${INSTALL_XPACK} -ne 0 ]]; then
 fi
 
 watchmaker_hardening
+
+jvm_tmp_adjust
 
 update_and_reboot_in_2_min
 
