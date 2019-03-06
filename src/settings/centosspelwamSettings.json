@@ -68,7 +68,7 @@
     },
     "ExistingImageName": {
       "type": "string",
-      "defaultValue": "spel-minimal-centos-7.4-azure-image-2017.10.1",
+      "defaultValue": "spel-minimal-centos-7-azure-image-2019.03",
       "metadata": {
         "description": "The shared storage settings"
       }
