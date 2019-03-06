@@ -63,14 +63,14 @@
       "type": "string",
       "defaultValue": "spel",
       "metadata": {
-        "description": "The shared storage settings"
+        "description": "Resource Group containing the existing image to use for VMs"
       }
     },
     "ExistingImageName": {
       "type": "string",
       "defaultValue": "spel-minimal-centos-7-azure-image-2019.03",
       "metadata": {
-        "description": "The shared storage settings"
+        "description": "Name of the Image to use for VMs"
       }
     }
   },
