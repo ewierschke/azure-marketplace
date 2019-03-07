@@ -207,9 +207,9 @@
           }
         },
         "oms": {
-          "publisher": "Microsoft.Azure.Extensions",
+          "publisher": "Microsoft.EnterpriseCloud.Monitoring",
           "type": "OmsAgentForLinux",
-          "typeHandlerVersion": "1.2",
+          "typeHandlerVersion": "1.8",
           "autoUpgradeMinorVersion": true,
           "settings": {
             "workspaceId": "[parameters('OMSWorkSpaceId')]"
