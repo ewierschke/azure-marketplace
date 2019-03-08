@@ -1280,6 +1280,125 @@
         "metadata": {
           "description": "OMS Workspace Key"
         }
+      },
+      "TrendRPMURL": {
+        "type": "string",
+        "defaultValue": "",
+        "metadata": {
+          "description": "URL from which to download the EL7 Trend Micro Deep Security agent RPM"
+        }
+      },
+      "TrendMgrHostname": {
+        "type": "string",
+        "defaultValue": "",
+        "metadata": {
+          "description": "Hostname or IP of the Trend Micro Deep Security Manager server to link to (e.g. trend.example.com)."
+        }
+      },
+      "TrendPolicyID": {
+        "type": "string",
+        "defaultValue": "",
+        "metadata": {
+          "description": "Policy ID with which to associate the new Trend Micro Deep Security agent"
+        }
+      },
+      "NessusRPMURL": {
+        "type": "string",
+        "defaultValue": "",
+        "metadata": {
+          "description": "Insecure URL from which to download the EL7 Nessus agent RPM."
+        }
+      },
+      "NessusRPMURLSharedAccessSignature": {
+        "type": "securestring",
+        "defaultValue": "",
+        "metadata": {
+          "description": "Protected Shared Access Signature to append to NessusRPMURL providing access to the Nessus RPM"
+        }
+      },
+      "NessusMgrHostname": {
+        "type": "string",
+        "defaultValue": "",
+        "metadata": {
+          "description": "Hostname or IP of the Nessus Manager server to link to (e.g. nessus.example.com)."
+        }
+      },
+      "NessusMgrKey": {
+        "type": "securestring",
+        "defaultValue": "",
+        "metadata": {
+          "description": "Agent Key for the manager to which you are attempting to link this agent"
+        }
+      },
+      "NessusGroups": {
+        "type": "string",
+        "defaultValue": "",
+        "metadata": {
+          "description": "Existing Agent Group(s) that you want your Agent to be a member of"
+        }
+      },
+      "WAMConfURL": {
+        "type": "string",
+        "defaultValue": "",
+        "metadata": {
+          "description": "URL to Custom conf.yaml file to use with Watchmaker"
+        }
+      },
+      "WAMConfURLSharedAccessSignature": {
+        "type": "securestring",
+        "defaultValue": "",
+        "metadata": {
+          "description": "Protected Shared Access Signature to append to WAMConfURL providing access to the Custom conf.yaml"
+        }
+      },
+      "WAMCustomSaltURL": {
+        "type": "string",
+        "defaultValue": "",
+        "metadata": {
+          "description": "URL to Custom salt-content.zip"
+        }
+      },
+      "WAMCustomSaltURLSharedAccessSignature": {
+        "type": "securestring",
+        "defaultValue": "",
+        "metadata": {
+          "description": "Protected Shared Access Signature to append to WAMCustomSaltURL providing access to Custom salt-content.zip"
+        }
+      },
+      "KibanaLDAPSCertURL": {
+        "type": "string",
+        "defaultValue": "",
+        "metadata": {
+          "description": "URL to LDAPS Public cert to be used on Kibana node"
+        }
+      },
+      "KibanaLDAPSCertURLSharedAccessSignature": {
+        "type": "securestring",
+        "defaultValue": "",
+        "metadata": {
+          "description": "Protected Shared Access Signature to append to KibanaLDAPSCertURL providing access to the LDAPS Public cert"
+        }
+      },
+      "KibanaEnvContentURL": {
+        "type": "string",
+        "defaultValue": "",
+        "metadata": {
+          "description": "URL to the Environment Content zip file to be used on Kibana node"
+        }
+      },
+      "KibanaEnvContentURLSharedAccessSignature": {
+        "type": "securestring",
+        "defaultValue": "",
+        "metadata": {
+          "description": "Protected Shared Access Signature to append to KibanaEnvContentURL providing access to the Environment Content zip file"
+        }
+      },
+      "KibanaLDAPGroupDN": {
+        "type": "securestring",
+        "defaultValue": "",
+        "metadata": {
+          "description": "LDAP DN of the group of users to be granted access to Kibana"
+        }
       }
   },
   "variables": {
@@ -1919,6 +2038,35 @@
         "password": "[parameters('adminPassword')]",
         "authenticationType": "[parameters('authenticationType')]",
         "sshPublicKey": "[parameters('sshPublicKey')]"
+      },
+      "OMS": {
+        "OMSWorkSpaceId": "[parameters('OMSWorkSpaceId')]",
+        "OMSWorkSpaceKey": "[parameters('OMSWorkSpaceKey')]"
+      },
+      "Trend": {
+        "TrendRPMURL": "[parameters('TrendRPMURL')]",
+        "TrendMgrHostname": "[parameters('TrendMgrHostname')]",
+        "TrendPolicyID": "[parameters('TrendPolicyID')]"
+      },
+      "Nessus": {
+        "NessusRPMURL": "[parameters('NessusRPMURL')]",
+        "NessusRPMURLSharedAccessSignature": "[parameters('NessusRPMURLSharedAccessSignature')]",
+        "NessusMgrHostname": "[parameters('NessusMgrHostname')]",
+        "NessusMgrKey": "[parameters('NessusMgrKey')]",
+        "NessusGroups": "[parameters('NessusGroups')]"
+      },
+      "CustomWAM": {
+        "WAMConfURL": "[parameters('WAMConfURL')]",
+        "WAMConfURLSharedAccessSignature": "[parameters('WAMConfURLSharedAccessSignature')]",
+        "WAMCustomSaltURL": "[parameters('WAMCustomSaltURL')]",
+        "WAMCustomSaltURLSharedAccessSignature": "[parameters('WAMCustomSaltURLSharedAccessSignature')]"
+      },
+      "Kibanahttpd": {
+        "KibanaLDAPSCertURL": "[parameters('KibanaLDAPSCertURL')]",
+        "KibanaLDAPSCertURLSharedAccessSignature": "[parameters('KibanaLDAPSCertURLSharedAccessSignature')]",
+        "KibanaEnvContentURL": "[parameters('KibanaEnvContentURL')]",
+        "KibanaEnvContentURLSharedAccessSignature": "[parameters('KibanaEnvContentURLSharedAccessSignature')]",
+        "KibanaLDAPGroupDN": "[parameters('KibanaLDAPGroupDN')]"
       }
     },
     "applicationGatewaySettings": {
