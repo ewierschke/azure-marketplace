@@ -2260,12 +2260,6 @@
           },
           "ExistingImageName": {
             "value": "[parameters('ExistingImageName')]"
-          },
-          "OMSWorkSpaceId": {
-            "value": "[parameters('OMSWorkSpaceId')]"
-          },
-          "OMSWorkSpaceKey": {
-            "value": "[parameters('OMSWorkSpaceKey')]"
           }
         }
       }
