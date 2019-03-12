@@ -95,9 +95,6 @@ fi
 #when using custom dns on vnet add search suffix for initial cluster config
 #echo "search internal.cloudapp.net" >> /etc/resolv.conf
 
-#test injecting nameserver into resolv.conf
-echo "nameserver 10.33.0.4" >> /etc/resolv.conf
-
 #########################
 # Parameter handling
 #########################
@@ -1396,6 +1393,9 @@ if [[ ${INSTALL_XPACK} -ne 0 ]]; then
   apply_security_settings
 fi
 
+#test injecting nameserver into resolv.conf
+log "[resolv_adjust] adding IP to resolv.conf"
+echo "nameserver 10.33.0.4" >> /etc/resolv.conf
 watchmaker_hardening
 
 jvm_tmp_adjust
