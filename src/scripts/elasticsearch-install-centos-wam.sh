@@ -92,6 +92,8 @@ else
   echo "127.0.0.1 ${HOSTNAME}" >> /etc/hosts
   log "hostname ${HOSTNAME} added to /etc/hosts"
 fi
+#when using custom dns on vnet add search suffix for initial cluster config
+echo "search  internal.cloudapp.net" >> /etc/resolv.conf
 
 #########################
 # Parameter handling
