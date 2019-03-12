@@ -93,7 +93,10 @@ else
   log "hostname ${HOSTNAME} added to /etc/hosts"
 fi
 #when using custom dns on vnet add search suffix for initial cluster config
-echo "search  internal.cloudapp.net" >> /etc/resolv.conf
+#echo "search internal.cloudapp.net" >> /etc/resolv.conf
+
+#test injecting nameserver into resolv.conf
+echo "nameserver 10.33.0.4" >> /etc/resolv.conf
 
 #########################
 # Parameter handling
