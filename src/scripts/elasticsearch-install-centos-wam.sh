@@ -1393,11 +1393,15 @@ if [[ ${INSTALL_XPACK} -ne 0 ]]; then
   apply_security_settings
 fi
 
-#test injecting nameserver into resolv.conf
+#test adjusting resolv.conf for domain join
 log "[resolv_adjust] adding IP to resolv.conf"
+sed -e '/168.63.129.16/ s/^#*/#/' -i /etc/resolv.conf
 echo "nameserver 10.33.0.4" >> /etc/resolv.conf
 echo "nameserver 10.33.0.4" >> /etc/resolv.conf.save
+log "[resolv_adjust] adding DNS1 to ifcfg"
 echo "DNS1="10.33.0.4"" >> /etc/sysconfig/network-scripts/ifcfg-eth0
+log "[resolv_adjust] commenting out azure dns"
+sed -e '/168.63.129.16/ s/^#*/#/' -i /etc/resolv.conf
 
 watchmaker_hardening
 
