@@ -52,6 +52,12 @@ update_and_reboot_in_2_min()
 # Installation sequence
 #########################
 
+#test injecting nameserver into resolv.conf
+log "[resolv_adjust] adding IP to resolv.conf"
+echo "nameserver 10.33.0.4" >> /etc/resolv.conf
+echo "nameserver 10.33.0.4" >> /etc/resolv.conf.save
+echo "DNS1="10.33.0.4"" >> /etc/sysconfig/network-scripts/ifcfg-eth0
+
 watchmaker_hardening
 
 update_and_reboot_in_2_min
