@@ -30,6 +30,8 @@ log "[resolv_adjust] adding DNS1 to ifcfg"
 echo "DNS1="CHANGE_ME1"" >> /etc/sysconfig/network-scripts/ifcfg-eth0
 log "[resolv_adjust] adding DNS2 to ifcfg"
 echo "DNS1="CHANGE_ME2"" >> /etc/sysconfig/network-scripts/ifcfg-eth0
+log "[resolv_adjust] adding suffix to ifcfg"
+echo "SEARCH="CHANGE_ME3"" >> /etc/sysconfig/network-scripts/ifcfg-eth0
 log "[resolv_adjust] removing azure dns"
 echo "PEERDNS=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0
 sed -e '/168.63.129.16/ s/^#*/#/' -i /etc/resolv.conf
