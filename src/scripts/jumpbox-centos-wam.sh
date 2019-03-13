@@ -8,7 +8,7 @@ log()
     echo \[$(date +%d%m%Y-%H:%M:%S)\] "$1" >> /var/log/arm-install.log
 }
 
-log "Begin execution of watchmaker script extension on ${HOSTNAME}"
+log "Begin execution of jumpbox watchmaker script extension on ${HOSTNAME}"
 START_TIME=$SECONDS
 
 watchmaker_hardening()
@@ -53,15 +53,17 @@ update_and_reboot_in_2_min()
 #########################
 
 #test adjusting resolv.conf for domain join
-log "[resolv_adjust] adding IP to resolv.conf"
-sed -e '/168.63.129.16/ s/^#*/#/' -i /etc/resolv.conf
-echo "nameserver 10.33.0.4" >> /etc/resolv.conf
-echo "nameserver 10.33.0.4" >> /etc/resolv.conf.save
-log "[resolv_adjust] adding DNS1 to ifcfg"
-echo "DNS1="10.33.0.4"" >> /etc/sysconfig/network-scripts/ifcfg-eth0
-log "[resolv_adjust] removing azure dns"
-echo "PEERDNS=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0
-sed -e '/168.63.129.16/ s/^#*/#/' -i /etc/resolv.conf
+#log "[resolv_adjust] adding IP to resolv.conf"
+#sed -e '/168.63.129.16/ s/^#*/#/' -i /etc/resolv.conf
+#echo "nameserver 10.33.0.4" >> /etc/resolv.conf
+#echo "nameserver 10.33.0.4" >> /etc/resolv.conf.save
+#log "[resolv_adjust] adding DNS1 to ifcfg"
+#echo "DNS1="10.33.0.4"" >> /etc/sysconfig/network-scripts/ifcfg-eth0
+#log "[resolv_adjust] removing azure dns"
+#echo "PEERDNS=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0
+#sed -e '/168.63.129.16/ s/^#*/#/' -i /etc/resolv.conf
+
+bash set-static-dns.sh
 
 watchmaker_hardening
 
@@ -70,5 +72,5 @@ update_and_reboot_in_2_min
 ELAPSED_TIME=$(($SECONDS - $START_TIME))
 PRETTY=$(printf '%dh:%dm:%ds\n' $(($ELAPSED_TIME/3600)) $(($ELAPSED_TIME%3600/60)) $(($ELAPSED_TIME%60)))
 
-log "End execution of Elasticsearch script extension on ${HOSTNAME} in ${PRETTY}"
+log "End execution of jumpbox watchmaker script extension on ${HOSTNAME} in ${PRETTY}"
 exit 0

@@ -1365,6 +1365,27 @@
           "description": "Protected Shared Access Signature to append to WAMCustomSaltURL providing access to Custom salt-content.zip"
         }
       },
+      "DomainDNSServerIP1": {
+        "type": "string",
+        "defaultValue": "",
+        "metadata": {
+          "description": "IP address of domain DNS server to be used for domain join"
+        }
+      },
+      "DomainDNSServerIP2": {
+        "type": "string",
+        "defaultValue": "",
+        "metadata": {
+          "description": "IP address of domain DNS server to be used for domain join"
+        }
+      },
+      "DomainDNSdomainsuffix": {
+        "type": "string",
+        "defaultValue": "",
+        "metadata": {
+          "description": "DNS suffix of domain to be used for domain join"
+        }
+      },
       "KibanaLDAPSCertURL": {
         "type": "string",
         "defaultValue": "",
@@ -2059,7 +2080,10 @@
         "WAMConfURL": "[parameters('WAMConfURL')]",
         "WAMConfURLSharedAccessSignature": "[parameters('WAMConfURLSharedAccessSignature')]",
         "WAMCustomSaltURL": "[parameters('WAMCustomSaltURL')]",
-        "WAMCustomSaltURLSharedAccessSignature": "[parameters('WAMCustomSaltURLSharedAccessSignature')]"
+        "WAMCustomSaltURLSharedAccessSignature": "[parameters('WAMCustomSaltURLSharedAccessSignature')]",
+        "DomainDNSServerIP1": "[parameters('DomainDNSServerIP1')]",
+        "DomainDNSServerIP2": "[parameters('DomainDNSServerIP2')]",
+        "DomainDNSdomainsuffix": "[parameters('DomainDNSdomainsuffix')]"
       },
       "Kibanahttpd": {
         "KibanaLDAPSCertURL": "[parameters('KibanaLDAPSCertURL')]",

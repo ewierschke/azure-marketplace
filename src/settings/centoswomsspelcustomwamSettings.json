@@ -116,7 +116,8 @@
       "[concat(parameters('templateBaseUrl'), 'scripts/java-install-centos.sh')]",
       "[concat(parameters('templateBaseUrl'), 'scripts/jumpbox-centos-wam.sh')]",
       "[concat(parameters('templateBaseUrl'), 'scripts/install-trend-agent.sh')]",
-      "[concat(parameters('templateBaseUrl'), 'scripts/install-nessus-agent.sh')]"
+      "[concat(parameters('templateBaseUrl'), 'scripts/install-nessus-agent.sh')]",
+      "[concat(parameters('templateBaseUrl'), 'scripts/set-static-dns.sh')]"
     ],
     "centosSettings": {
       "imageReference": {
@@ -133,7 +134,7 @@
             "fileUris": "[variables('centosScripts')]"
           },
           "protectedSettings": {
-            "commandToExecute": "[concat('#!/bin/bash\n\nyum -y install wget && ', variables('Trend'), ' && ', variables('Nessus'), ' && ', variables('CustESWAMPrep'), ' && bash elasticsearch-install-centos-wam.sh -x', variables('commonShortOpts'), variables('commonInstallParams'))]"
+            "commandToExecute": "[concat('#!/bin/bash\n\nyum -y install wget && ', variables('Trend'), ' && ', variables('Nessus'), ' && ', variables('adjustSetStaticDNSScript'), ' && ', variables('CustESWAMPrep'), ' && bash elasticsearch-install-centos-wam.sh -x', variables('commonShortOpts'), variables('commonInstallParams'))]"
           }
         },
         "client": {
@@ -145,7 +146,7 @@
             "fileUris": "[variables('centosScripts')]"
           },
           "protectedSettings": {
-            "commandToExecute": "[concat('#!/bin/bash\n\nyum -y install wget && ', variables('Trend'), ' && ', variables('Nessus'), ' && ', variables('CustESWAMPrep'), ' && bash elasticsearch-install-centos-wam.sh -y', variables('commonShortOpts'), variables('commonInstallParams'))]"
+            "commandToExecute": "[concat('#!/bin/bash\n\nyum -y install wget && ', variables('Trend'), ' && ', variables('Nessus'), ' && ', variables('adjustSetStaticDNSScript'), ' && ', variables('CustESWAMPrep'), ' && bash elasticsearch-install-centos-wam.sh -y', variables('commonShortOpts'), variables('commonInstallParams'))]"
           }
         },
         "data": {
@@ -157,7 +158,7 @@
             "fileUris": "[variables('centosScripts')]"
           },
           "protectedSettings": {
-            "commandToExecute": "[concat('#!/bin/bash\n\nyum -y install wget && ', variables('Trend'), ' && ', variables('Nessus'), ' && ', variables('CustESWAMPrep'), ' && bash elasticsearch-install-centos-wam.sh -', variables('dataNodeShortOpt'), variables('commonShortOpts'), variables('commonInstallParams'))]"
+            "commandToExecute": "[concat('#!/bin/bash\n\nyum -y install wget && ', variables('Trend'), ' && ', variables('Nessus'), ' && ', variables('adjustSetStaticDNSScript'), ' && ', variables('CustESWAMPrep'), ' && bash elasticsearch-install-centos-wam.sh -', variables('dataNodeShortOpt'), variables('commonShortOpts'), variables('commonInstallParams'))]"
           }
         },
         "kibana": {
@@ -169,7 +170,7 @@
             "fileUris": "[variables('centosScripts')]"
           },
           "protectedSettings": {
-            "commandToExecute": "[concat('#!/bin/bash\n\nyum -y install wget && ', variables('Trend'), ' && ', variables('Nessus'), ' && ', variables('CustKibWAMPrep'), ' && bash kibana-install-centos-wam.sh -', variables('installPluginsShortOpt'), 'n ', variables('quote'), parameters('esSettings').clusterName, variables('quote'), ' -v ', variables('quote'), parameters('esSettings').version, variables('quote'), ' -u ', variables('quote'), variables('loadBalancerIp') ,variables('quote'), ' -S ', variables('quote'), replace(parameters('esSettings').securityKibanaPwd, variables('quote'), variables('escapedQuote')), variables('quote'), ' -C ', variables('quote'), parameters('topologySettings').kibanaCertBlob, variables('quote'), ' -K ', variables('quote'), parameters('topologySettings').kibanaKeyBlob, variables('quote'), ' -P ', variables('quote'), replace(parameters('topologySettings').kibanaKeyPassphrase, variables('quote'), variables('escapedQuote')), variables('quote'), ' -Y ', variables('quote'), replace(replace(parameters('topologySettings').kibanaYaml, variables('quote'), variables('escapedQuote')), concat(variables('backslash'), variables('doublequote')), variables('doublequote')), variables('quote'), ' -H ', variables('quote'), parameters('esSettings').httpCertBlob, variables('quote'), ' -G ', variables('quote'), replace(parameters('esSettings').httpCertPassword, variables('quote'), variables('escapedQuote')), variables('quote'), ' -V ', variables('quote'), parameters('esSettings').httpCaCertBlob,variables('quote'), ' -J ', variables('quote'), replace(parameters('esSettings').httpCaCertPassword, variables('quote'), variables('escapedQuote')), variables('quote'), ' -U ', variables('quote'), variables('kibanaDomainName'), variables('quote'))]"
+            "commandToExecute": "[concat('#!/bin/bash\n\nyum -y install wget && ', variables('Trend'), ' && ', variables('Nessus'), ' && ', variables('adjustSetStaticDNSScript'), ' && ', variables('CustKibWAMPrep'), ' && bash kibana-install-centos-wam.sh -', variables('installPluginsShortOpt'), 'n ', variables('quote'), parameters('esSettings').clusterName, variables('quote'), ' -v ', variables('quote'), parameters('esSettings').version, variables('quote'), ' -u ', variables('quote'), variables('loadBalancerIp') ,variables('quote'), ' -S ', variables('quote'), replace(parameters('esSettings').securityKibanaPwd, variables('quote'), variables('escapedQuote')), variables('quote'), ' -C ', variables('quote'), parameters('topologySettings').kibanaCertBlob, variables('quote'), ' -K ', variables('quote'), parameters('topologySettings').kibanaKeyBlob, variables('quote'), ' -P ', variables('quote'), replace(parameters('topologySettings').kibanaKeyPassphrase, variables('quote'), variables('escapedQuote')), variables('quote'), ' -Y ', variables('quote'), replace(replace(parameters('topologySettings').kibanaYaml, variables('quote'), variables('escapedQuote')), concat(variables('backslash'), variables('doublequote')), variables('doublequote')), variables('quote'), ' -H ', variables('quote'), parameters('esSettings').httpCertBlob, variables('quote'), ' -G ', variables('quote'), replace(parameters('esSettings').httpCertPassword, variables('quote'), variables('escapedQuote')), variables('quote'), ' -V ', variables('quote'), parameters('esSettings').httpCaCertBlob,variables('quote'), ' -J ', variables('quote'), replace(parameters('esSettings').httpCaCertPassword, variables('quote'), variables('escapedQuote')), variables('quote'), ' -U ', variables('quote'), variables('kibanaDomainName'), variables('quote'))]"
           }
         },
         "logstash": {
@@ -181,7 +182,7 @@
             "fileUris": "[variables('centosScripts')]"
           },
           "protectedSettings": {
-            "commandToExecute": "[concat('#!/bin/bash\n\nyum -y install wget && ', variables('Trend'), ' && ', variables('Nessus'), ' && ', variables('CustlinwatchWAMPrep'), ' && bash logstash-install-centos.sh -', variables('installPluginsShortOpt'), 'v ', variables('quote'), parameters('esSettings').version, variables('quote'), ' -m ', parameters('topologySettings').logstashHeapSize, ' -u ', variables('quote'), variables('loadBalancerIp'), variables('quote'), ' -S ', variables('quote'), replace(parameters('esSettings').securityLogstashPwd, variables('quote'), variables('escapedQuote')), variables('quote'), ' -L ', variables('quote'), parameters('topologySettings').logstashPlugins, variables('quote'), ' -c ', variables('quote'), parameters('topologySettings').logstashConf, variables('quote'), ' -K ', variables('quote'), replace(parameters('topologySettings').logstashKeystorePwd, variables('quote'), variables('escapedQuote')), variables('quote'), ' -Y ', variables('quote'), replace(replace(parameters('topologySettings').logstashYaml, variables('quote'), variables('escapedQuote')), concat(variables('backslash'), variables('doublequote')), variables('doublequote')), variables('quote'), ' -H ', variables('quote'), parameters('esSettings').httpCertBlob, variables('quote'), ' -G ', variables('quote'), replace(parameters('esSettings').httpCertPassword, variables('quote'), variables('escapedQuote')), variables('quote'), ' -V ', variables('quote'), parameters('esSettings').httpCaCertBlob, variables('quote'), ' -J ', variables('quote'), replace(parameters('esSettings').httpCaCertPassword, variables('quote'), variables('escapedQuote')), variables('quote'))]"
+            "commandToExecute": "[concat('#!/bin/bash\n\nyum -y install wget && ', variables('Trend'), ' && ', variables('Nessus'), ' && ', variables('adjustSetStaticDNSScript'), ' && ', variables('CustlinwatchWAMPrep'), ' && bash logstash-install-centos.sh -', variables('installPluginsShortOpt'), 'v ', variables('quote'), parameters('esSettings').version, variables('quote'), ' -m ', parameters('topologySettings').logstashHeapSize, ' -u ', variables('quote'), variables('loadBalancerIp'), variables('quote'), ' -S ', variables('quote'), replace(parameters('esSettings').securityLogstashPwd, variables('quote'), variables('escapedQuote')), variables('quote'), ' -L ', variables('quote'), parameters('topologySettings').logstashPlugins, variables('quote'), ' -c ', variables('quote'), parameters('topologySettings').logstashConf, variables('quote'), ' -K ', variables('quote'), replace(parameters('topologySettings').logstashKeystorePwd, variables('quote'), variables('escapedQuote')), variables('quote'), ' -Y ', variables('quote'), replace(replace(parameters('topologySettings').logstashYaml, variables('quote'), variables('escapedQuote')), concat(variables('backslash'), variables('doublequote')), variables('doublequote')), variables('quote'), ' -H ', variables('quote'), parameters('esSettings').httpCertBlob, variables('quote'), ' -G ', variables('quote'), replace(parameters('esSettings').httpCertPassword, variables('quote'), variables('escapedQuote')), variables('quote'), ' -V ', variables('quote'), parameters('esSettings').httpCaCertBlob, variables('quote'), ' -J ', variables('quote'), replace(parameters('esSettings').httpCaCertPassword, variables('quote'), variables('escapedQuote')), variables('quote'))]"
           }
         },
         "jumpbox": {
@@ -193,7 +194,7 @@
             "fileUris": "[variables('centosScripts')]"
           },
           "protectedSettings": {
-            "commandToExecute": "[concat('#!/bin/bash\n\nyum -y install wget && ', variables('Trend'), ' && ', variables('Nessus'), ' && ', variables('CustlinwatchWAMPrep'), ' && bash jumpbox-centos-wam.sh')]"
+            "commandToExecute": "[concat('#!/bin/bash\n\nyum -y install wget && ', variables('Trend'), ' && ', variables('Nessus'), ' && ', variables('adjustSetStaticDNSScript'), ' && ', variables('CustlinwatchWAMPrep'), ' && bash jumpbox-centos-wam.sh')]"
           }
         },
         "oms": {
@@ -216,6 +217,7 @@
     "CustESWAMPrep": "[concat('yum -y install httpd && service firewalld start && firewall-cmd --zone=public --add-port=80/tcp && service httpd start && service httpd start && wget ', variables('SingleQuote'), parameters('commonVmSettings').CustomWAM.WAMCustomSaltURL, parameters('commonVmSettings').CustomWAM.WAMCustomSaltURLSharedAccessSignature, variables('SingleQuote'), ' -O /var/www/html/salt-content.zip && wget ', variables('SingleQuote'), parameters('commonVmSettings').CustomWAM.WAMConfURL, parameters('commonVmSettings').CustomWAM.WAMCustomSaltURLSharedAccessSignature, variables('SingleQuote'), ' -O /root/config.yaml && sed -i \"s|-config=.*|-config=/root/config.yaml \\&\\& /opt/pbis/bin/update-dns|\" elasticsearch-install-centos-wam.sh')]",
     "CustKibWAMPrep": "[concat('yum -y install httpd && service firewalld start && firewall-cmd --zone=public --add-port=80/tcp && service httpd start && service httpd start && wget ', variables('SingleQuote'), parameters('commonVmSettings').CustomWAM.WAMCustomSaltURL, parameters('commonVmSettings').CustomWAM.WAMCustomSaltURLSharedAccessSignature, variables('SingleQuote'), ' -O /var/www/html/salt-content.zip && wget ', variables('SingleQuote'), parameters('commonVmSettings').CustomWAM.WAMConfURL, parameters('commonVmSettings').CustomWAM.WAMCustomSaltURLSharedAccessSignature, variables('SingleQuote'), ' -O /root/config.yaml && sed -i \"s|-config=.*|-config=/root/config.yaml \\&\\& /opt/pbis/bin/update-dns|\" kibana-install-centos-wam.sh')]",
     "CustlinwatchWAMPrep": "[concat('yum -y install httpd && service firewalld start && firewall-cmd --zone=public --add-port=80/tcp && service httpd start && service httpd start && wget ', variables('SingleQuote'), parameters('commonVmSettings').CustomWAM.WAMCustomSaltURL, parameters('commonVmSettings').CustomWAM.WAMCustomSaltURLSharedAccessSignature, variables('SingleQuote'), ' -O /var/www/html/salt-content.zip && wget ', variables('SingleQuote'), parameters('commonVmSettings').CustomWAM.WAMConfURL, parameters('commonVmSettings').CustomWAM.WAMCustomSaltURLSharedAccessSignature, variables('SingleQuote'), ' -O /root/config.yaml && sed -i \"s|-config=.*|-config=/root/config.yaml \\&\\& /opt/pbis/bin/update-dns|\" jumpbox-centos-wam.sh')]",
+    "adjustSetStaticDNSScript": "[concat('sed -i \"s|CHANGE_ME1|', parameters('commonVmSettings').CustomWAM.DomainDNSServerIP1, ' set-static-dns.sh', ' sed -i \"s|CHANGE_ME2|', parameters('commonVmSettings').CustomWAM.DomainDNSServerIP2, ' set-static-dns.sh', ' sed -i \"s|CHANGE_ME3|', parameters('commonVmSettings').CustomWAM.DomainDNSdomainsuffix, ' set-static-dns.sh')]",
     "KibLDAPScertURL": "[concat(variables('SingleQuote'), parameters('commonVmSettings').Kibanahttpd.KibanaLDAPSCertURL, parameters('commonVmSettings').Kibanahttpd.KibanaLDAPSCertURLSharedAccessSignature, variables('SingleQuote'))]",
     "KibEnvURL": "[concat(variables('SingleQuote'), parameters('commonVmSettings').Kibanahttpd.KibanaEnvContentURL, parameters('commonVmSettings').Kibanahttpd.KibanaEnvContentURLSharedAccessSignature, variables('SingleQuote'))]"
   },
