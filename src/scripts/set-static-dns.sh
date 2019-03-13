@@ -21,11 +21,11 @@ START_TIME=$SECONDS
 #test adjusting resolv.conf for domain join
 log "[resolv_adjust] adding DNS IP to resolv.conf"
 echo "nameserver CHANGE_ME1" >> /etc/resolv.conf
-echo "nameserver CHANGE_ME1 >> /etc/resolv.conf.save
+echo "nameserver CHANGE_ME1" >> /etc/resolv.conf.save
 echo "nameserver CHANGE_ME2" >> /etc/resolv.conf
-echo "nameserver CHANGE_ME2 >> /etc/resolv.conf.save
+echo "nameserver CHANGE_ME2" >> /etc/resolv.conf.save
 echo "search CHANGE_ME3" >> /etc/resolv.conf
-echo "search CHANGE_ME3 >> /etc/resolv.conf.save
+echo "search CHANGE_ME3" >> /etc/resolv.conf.save
 log "[resolv_adjust] adding DNS1 to ifcfg"
 echo "DNS1="CHANGE_ME1"" >> /etc/sysconfig/network-scripts/ifcfg-eth0
 log "[resolv_adjust] adding DNS2 to ifcfg"
