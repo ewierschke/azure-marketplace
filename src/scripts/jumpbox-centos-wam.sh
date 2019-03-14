@@ -11,6 +11,13 @@ log()
 log "Begin execution of jumpbox watchmaker script extension on ${HOSTNAME}"
 START_TIME=$SECONDS
 
+# Set Static DNS after cluster startup but before WAM run for domain join
+# script contents to be modified by arm template before execution
+set_static_dns()
+{
+  bash set-static-dns.sh
+}
+
 watchmaker_hardening()
 {
     log "[watchmaker_hardening] running watchmaker for hardening"
@@ -52,18 +59,7 @@ update_and_reboot_in_2_min()
 # Installation sequence
 #########################
 
-#test adjusting resolv.conf for domain join
-#log "[resolv_adjust] adding IP to resolv.conf"
-#sed -e '/168.63.129.16/ s/^#*/#/' -i /etc/resolv.conf
-#echo "nameserver 10.33.0.4" >> /etc/resolv.conf
-#echo "nameserver 10.33.0.4" >> /etc/resolv.conf.save
-#log "[resolv_adjust] adding DNS1 to ifcfg"
-#echo "DNS1="10.33.0.4"" >> /etc/sysconfig/network-scripts/ifcfg-eth0
-#log "[resolv_adjust] removing azure dns"
-#echo "PEERDNS=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0
-#sed -e '/168.63.129.16/ s/^#*/#/' -i /etc/resolv.conf
-
-bash set-static-dns.sh
+set_static_dns
 
 watchmaker_hardening
 
