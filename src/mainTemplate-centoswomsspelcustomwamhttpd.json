@@ -1385,6 +1385,41 @@
         "metadata": {
           "description": "DNS suffix of domain to be used for domain join"
         }
+      },
+      "KibanaLDAPSCertURL": {
+        "type": "string",
+        "defaultValue": "",
+        "metadata": {
+          "description": "URL to LDAPS Public cert to be used on Kibana node"
+        }
+      },
+      "KibanaLDAPSCertURLSharedAccessSignature": {
+        "type": "securestring",
+        "defaultValue": "",
+        "metadata": {
+          "description": "Protected Shared Access Signature to append to KibanaLDAPSCertURL providing access to the LDAPS Public cert"
+        }
+      },
+      "KibanaEnvContentURL": {
+        "type": "string",
+        "defaultValue": "",
+        "metadata": {
+          "description": "URL to the Environment Content zip file to be used on Kibana node"
+        }
+      },
+      "KibanaEnvContentURLSharedAccessSignature": {
+        "type": "securestring",
+        "defaultValue": "",
+        "metadata": {
+          "description": "Protected Shared Access Signature to append to KibanaEnvContentURL providing access to the Environment Content zip file"
+        }
+      },
+      "KibanaLDAPGroupDN": {
+        "type": "securestring",
+        "defaultValue": "",
+        "metadata": {
+          "description": "LDAP DN of the group of users to be granted access to Kibana"
+        }
       }
   },
   "variables": {
@@ -1397,7 +1432,7 @@
       "gateway": "[concat(toLower(parameters('appGatewayTier')),'-application-gateway-resources')]"
     },
     "loadBalancerTemplateUrl": "[concat(variables('templateBaseUrl'), 'loadbalancers/', variables('loadBalancerOptions')[parameters('loadBalancerType')],'.json')]",
-    "osSettingsTemplateUrl": "[concat(variables('templateBaseUrl'), 'settings/centoswomsspelcustomwamSettings.json')]",
+    "osSettingsTemplateUrl": "[concat(variables('templateBaseUrl'), 'settings/centoswomsspelcustomwamhttpdettings.json')]",
     "location": "[parameters('location')]",
     "azureCloudStorageAccount": {
       "name": "[parameters('azureCloudStorageAccountName')]",
@@ -2049,6 +2084,13 @@
         "DomainDNSServerIP1": "[parameters('DomainDNSServerIP1')]",
         "DomainDNSServerIP2": "[parameters('DomainDNSServerIP2')]",
         "DomainDNSdomainsuffix": "[parameters('DomainDNSdomainsuffix')]"
+      },
+      "Kibanahttpd": {
+        "KibanaLDAPSCertURL": "[parameters('KibanaLDAPSCertURL')]",
+        "KibanaLDAPSCertURLSharedAccessSignature": "[parameters('KibanaLDAPSCertURLSharedAccessSignature')]",
+        "KibanaEnvContentURL": "[parameters('KibanaEnvContentURL')]",
+        "KibanaEnvContentURLSharedAccessSignature": "[parameters('KibanaEnvContentURLSharedAccessSignature')]",
+        "KibanaLDAPGroupDN": "[parameters('KibanaLDAPGroupDN')]"
       }
     },
     "applicationGatewaySettings": {
