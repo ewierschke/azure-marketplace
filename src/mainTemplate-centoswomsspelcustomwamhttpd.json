@@ -1432,7 +1432,7 @@
       "gateway": "[concat(toLower(parameters('appGatewayTier')),'-application-gateway-resources')]"
     },
     "loadBalancerTemplateUrl": "[concat(variables('templateBaseUrl'), 'loadbalancers/', variables('loadBalancerOptions')[parameters('loadBalancerType')],'.json')]",
-    "osSettingsTemplateUrl": "[concat(variables('templateBaseUrl'), 'settings/centoswomsspelcustomwamhttpdettings.json')]",
+    "osSettingsTemplateUrl": "[concat(variables('templateBaseUrl'), 'settings/centoswomsspelcustomwamhttpdSettings.json')]",
     "location": "[parameters('location')]",
     "azureCloudStorageAccount": {
       "name": "[parameters('azureCloudStorageAccountName')]",
