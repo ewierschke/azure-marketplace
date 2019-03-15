@@ -86,7 +86,7 @@ APACHE_ENV_CONTENT_URL=""
 APACHE_LDAP_GROUP_DN=""
 
 #Loop through options passed
-while getopts :n:v:u:S:C:K:P:Y:H:G:V:J:U:l:a:c:e:gh optname; do
+while getopts :n:v:u:S:C:K:P:Y:H:G:V:J:U:c:e:g:lah optname; do
   log "Option $optname set"
   case $optname in
     n) #set cluster name

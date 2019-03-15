@@ -1295,7 +1295,7 @@ watchmaker_hardening()
     # Run Watchmaker
     watchmaker --no-reboot --log-level debug --log-dir=/var/log/watchmaker --config=/usr/lib/python2.7/site-packages/watchmaker/static/config.yaml
     if [ $? -ne 0 ]; then
-        log "watchmaker didn't run correctly, exit"
+        log "watchmaker or dns update didn't run correctly, exit"
         exit 1
     fi
     log "[watchmaker_hardening] disabling fips mode for azure linux agent and extensions"
