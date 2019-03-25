@@ -55,6 +55,8 @@ help()
     echo "    -a      set the default storage account for azure cloud plugin"
     echo "    -k      set the key for the default storage account for azure cloud plugin"
 
+    echo "    -s      URL from which to retrieve the name_synonyms.txt file"
+
     echo "    -h      view this help content"
 }
 
@@ -144,8 +146,10 @@ TRANSPORT_CERT_PASSWORD=""
 SAML_METADATA_URI=""
 SAML_SP_URI=""
 
+NAME_SYNONYMS_URL=""
+
 #Loop through options passed
-while getopts :n:m:v:A:R:K:S:F:Z:p:a:k:L:C:B:E:H:G:T:W:V:J:N:D:O:P:xyzldjh optname; do
+while getopts :n:m:v:A:R:K:S:F:Z:p:a:k:L:C:B:E:H:G:T:W:V:J:N:D:O:P:s:xyzldjh optname; do
   log "Option $optname set"
   case $optname in
     n) #set cluster name
@@ -243,6 +247,9 @@ while getopts :n:m:v:A:R:K:S:F:Z:p:a:k:L:C:B:E:H:G:T:W:V:J:N:D:O:P:xyzldjh optna
       ;;
     E) #azure storage account endpoint suffix
       STORAGE_SUFFIX="${OPTARG}"
+      ;;
+    s) #name_synonyms.txt url
+      NAME_SYNONYMS_URL="${OPTARG}"
       ;;
     h) #show help
       help
@@ -1254,6 +1261,12 @@ port_forward()
     log "[port_forward] port forwarding configured"
 }
 
+get_name_synonyms()
+{
+    local NAME_SYNONYMS_PATH="/etc/elasticsearch/name_synonyms.txt"
+    wget --retry-connrefused --waitretry=1 -q "$NAME_SYNONYMS_URL" -O $NAME_SYNONYMS_PATH
+}
+
 firewall_ports()
 {
     log "[firewall_ports] starting and enabling firewalld"
@@ -1403,6 +1416,8 @@ configure_elasticsearch
 configure_os_properties
 
 port_forward
+
+get_name_synonyms
 
 firewall_ports
 

@@ -1420,6 +1420,20 @@
         "metadata": {
           "description": "LDAP DN of the group of users to be granted access to Kibana"
         }
+      },
+      "NameSynonymsURL": {
+        "type": "securestring",
+        "defaultValue": "",
+        "metadata": {
+          "description": "URL to the name_synonyms file to be used on ES nodes"
+        }
+      },
+      "NameSynonymsURLSharedAccessSignature": {
+        "type": "securestring",
+        "defaultValue": "",
+        "metadata": {
+          "description": "Protected Shared Access Signature to append to NameSynonymsURL providing access to the name_synonyms file"
+        }
       }
   },
   "variables": {
@@ -2091,6 +2105,10 @@
         "KibanaEnvContentURL": "[parameters('KibanaEnvContentURL')]",
         "KibanaEnvContentURLSharedAccessSignature": "[parameters('KibanaEnvContentURLSharedAccessSignature')]",
         "KibanaLDAPGroupDN": "[parameters('KibanaLDAPGroupDN')]"
+      },
+      "NameSynonyms": {
+        "NameSynonymsURL": "[parameters('NameSynonymsURL')]",
+        "NameSynonymsURLSharedAccessSignature": "[parameters('NameSynonymsURLSharedAccessSignature')]"
       }
     },
     "applicationGatewaySettings": {
