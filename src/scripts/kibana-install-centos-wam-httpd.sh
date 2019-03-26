@@ -534,7 +534,7 @@ kibana_httpd_ldaps_auth()
 {
     #configure kibana httpd for ldaps authentication
     if [ "${CONF_APACHE_HTTPD}" -ne 0 ]; then
-        log "[kibana_httpd_self_signed_cert] Configure kibana for httpd reverse proxy using self signed ssl cert"
+        log "[kibana_httpd_self_signed_cert] Configure kibana for ldaps authentication"
         bash kibananodeldapsauth.sh -C "${APACHE_LDAPS_CERT}" -E "${APACHE_ENV_CONTENT_URL}" -G "${APACHE_LDAP_GROUP_DN}"
         systemctl enable httpd
         systemctl restart httpd

@@ -119,7 +119,8 @@
       "[concat(parameters('templateBaseUrl'), 'scripts/install-nessus-agent.sh')]",
       "[concat(parameters('templateBaseUrl'), 'scripts/set-static-dns.sh')]",
       "[concat(parameters('templateBaseUrl'), 'scripts/clientnodecertauth.sh')]",
-      "[concat(parameters('templateBaseUrl'), 'scripts/httpdrevproxyselfsigned.sh')]"
+      "[concat(parameters('templateBaseUrl'), 'scripts/httpdrevproxyselfsigned.sh')]",
+      "[concat(parameters('templateBaseUrl'), 'scripts/kibananodeldapsauth.sh')]"
     ],
     "centosSettings": {
       "imageReference": {
