@@ -1242,8 +1242,19 @@ port_forward()
     log "[port_forward] setting up port forwarding from 9201 to 9200"
     #redirects 9201 > 9200 locally
     #this to overcome a limitation in ARM where to vm 2 loadbalancers cannot route on the same backend ports
-    firewall-cmd --zone=public --add-masquerade --permanent
-    firewall-cmd --zone=public --add-forward-port=port=9201:proto=tcp:toport=9200 --permanent
+    if [ ${INSTALL_XPACK} -eq 0 ]; then
+      #if not installing xpack only port forward for subnet IPs and azure load balancer source
+      log "[port_forward] configuring port forwarding for local subnet and azure load balancer source IPs"
+      thissubnet=$(ip -o -f inet addr show | awk '/scope global/ {print $4}')
+      firewall-cmd --permanent --new-ipset=thissubnetandlb --type=hash:net
+      firewall-cmd --permanent --ipset=thissubnetandlb --add-entry=$thissubnet
+      firewall-cmd --permanent --ipset=thissubnetandlb --add-entry=168.63.129.16
+      firewall-cmd --permanent --zone=public --add-rich-rule='rule family="ipv4" source ipset="thissubnetandlb" forward-port port="9201" protocol="tcp" to-port="9200"'
+    else 
+      log "[port_forward] configuring port forwarding for all source IPs"
+      firewall-cmd --zone=public --add-masquerade --permanent
+      firewall-cmd --zone=public --add-forward-port=port=9201:proto=tcp:toport=9200 --permanent
+    fi
     #iptables -t nat -I PREROUTING -p tcp --dport 9201 -j REDIRECT --to-ports 9200
     #iptables -t nat -I OUTPUT -p tcp -o lo --dport 9201 -j REDIRECT --to-ports 9200
 
@@ -1273,16 +1284,28 @@ firewall_ports()
     systemctl start firewalld.service
     systemctl enable firewalld.service
     if [ ${DATA_ONLY_NODE} -ne 1 ]; then
-        log "[firewall_ports] setting up firewall ports for data nodes"
+      if [ ${INSTALL_XPACK} -eq 0 ]; then
+        #is not installing xpack only open firewall port for subnet IPs and azure load balancer
+        log "[firewall_ports] setting up firewall ports for data nodes from subnet and azure load balancer source IPs"
+        firewall-cmd --permanent --zone=public --add-rich-rule='rule family="ipv4" source ipset=thissubnetandlb port protocol="tcp" port="9300" accept'
+      else 
+        log "[firewall_ports] setting up firewall ports for data nodes from all source IPs"
         firewall-cmd --zone=public --permanent --add-port=9300/tcp
         firewall-cmd --zone=public --add-port=9300/tcp
+      fi
     fi
     if [ ${CLIENT_ONLY_NODE} -eq 1 ]; then
-        log "[firewall_ports] setting up firewall ports for client nodes"
+      if [ ${INSTALL_XPACK} -eq 0 ]; then
+        #is not installing xpack only open firewall port for subnet IPs and azure load balancer
+        log "[firewall_ports] setting up firewall ports for client nodes from subnet and azure load balancer source IPs"
+        firewall-cmd --permanent --zone=public --add-rich-rule='rule family="ipv4" source ipset=thissubnetandlb port protocol="tcp" port="9200" accept'
+      else
+        log "[firewall_ports] setting up firewall ports for client nodes from all source IPs"
         firewall-cmd --zone=public --permanent --add-port=9200/tcp
         firewall-cmd --zone=public --add-port=9200/tcp
+      fi
     fi
-    log "[firewall_ports] firewall ports opened"
+    log "[firewall_ports] firewall ports configured"
 }
 
 # Set Static DNS after cluster startup but before WAM run for domain join

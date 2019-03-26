@@ -471,9 +471,19 @@ firewall_ports()
     log "[firewall_ports] starting and enabling firewalld"
     systemctl start firewalld.service
     systemctl enable firewalld.service
-    log "[firewall_ports] setting up firewall ports"
-    firewall-cmd --zone=public --add-port=5601/tcp
-    firewall-cmd --zone=public --permanent --add-port=5601/tcp
+    if [ ${INSTALL_XPACK} -eq 0 ]; then
+      #if not installing xpack only open firewall port for subnet IPs and azure load balancer
+      log "[firewall_ports] setting up firewall ports from subnet and azure load balancer source IPs"
+      thissubnet=$(ip -o -f inet addr show | awk '/scope global/ {print $4}')
+      firewall-cmd --permanent --new-ipset=thissubnetandlb --type=hash:net
+      firewall-cmd --permanent --ipset=thissubnetandlb --add-entry=$thissubnet
+      firewall-cmd --permanent --ipset=thissubnetandlb --add-entry=168.63.129.16
+      firewall-cmd --permanent --zone=public --add-rich-rule='rule family="ipv4" source ipset=thissubnetandlb port protocol="tcp" port="5601" accept'
+    else 
+      log "[firewall_ports] setting up firewall ports from all source IPs"
+      firewall-cmd --zone=public --add-port=5601/tcp
+      firewall-cmd --zone=public --permanent --add-port=5601/tcp
+    fi
 
     log "[firewall_ports] firewall ports opened"
 }
