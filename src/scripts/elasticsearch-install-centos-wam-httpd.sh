@@ -1188,6 +1188,7 @@ install_wget()
 install_epel()
 {
     install_yum_package epel-release
+    yum-config-manager --enable epel
 }
 
 #added for shasum
