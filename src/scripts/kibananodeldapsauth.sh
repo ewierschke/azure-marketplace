@@ -159,6 +159,7 @@ unzip -o /root/content.zip -d /root
 #get content into variables
 log "Getting creds from env file..."
 yum -y install epel-release
+yum-config-manager --enable epel
 yum -y install python-pip jq
 pip install pyyaml
 python -c 'import sys, yaml, json; json.dump(yaml.load(sys.stdin), sys.stdout, indent=4)' < /root/env.sls > /root/env.json
