@@ -117,7 +117,7 @@
         "provider": "[toUpper(parameters('elasticTags').provider)]"
       },
       "properties": {
-        "publicIPAllocationMethod": "Dynamic",
+        "publicIPAllocationMethod": "Static",
         "dnsSettings": {
           "domainNameLabel": "[concat('lb-', uniqueString(resourceGroup().id))]"
         }
