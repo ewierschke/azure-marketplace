@@ -29,7 +29,7 @@ echo "search CHANGE_ME3" >> /etc/resolv.conf.save
 log "[resolv_adjust] adding DNS1 to ifcfg"
 echo "DNS1="CHANGE_ME1"" >> /etc/sysconfig/network-scripts/ifcfg-eth0
 log "[resolv_adjust] adding DNS2 to ifcfg"
-echo "DNS1="CHANGE_ME2"" >> /etc/sysconfig/network-scripts/ifcfg-eth0
+echo "DNS2="CHANGE_ME2"" >> /etc/sysconfig/network-scripts/ifcfg-eth0
 log "[resolv_adjust] adding suffix to ifcfg"
 echo "SEARCH="CHANGE_ME3"" >> /etc/sysconfig/network-scripts/ifcfg-eth0
 log "[resolv_adjust] removing azure dns"
