@@ -1386,6 +1386,12 @@
           "description": "DNS suffix of domain to be used for domain join"
         }
       },
+      "pubwatchmakerpinnedversion": {
+        "type": "string",
+        "metadata": {
+          "description": "Version of Watchmaker to which to pin install"
+        }
+      },
       "KibanaLDAPSCertURL": {
         "type": "string",
         "defaultValue": "",
@@ -2097,7 +2103,8 @@
         "WAMCustomSaltURLSharedAccessSignature": "[parameters('WAMCustomSaltURLSharedAccessSignature')]",
         "DomainDNSServerIP1": "[parameters('DomainDNSServerIP1')]",
         "DomainDNSServerIP2": "[parameters('DomainDNSServerIP2')]",
-        "DomainDNSdomainsuffix": "[parameters('DomainDNSdomainsuffix')]"
+        "DomainDNSdomainsuffix": "[parameters('DomainDNSdomainsuffix')]",
+        "pubwatchmakerpinnedversion": "[parameters('pubwatchmakerpinnedversion')]"
       },
       "Kibanahttpd": {
         "KibanaLDAPSCertURL": "[parameters('KibanaLDAPSCertURL')]",
