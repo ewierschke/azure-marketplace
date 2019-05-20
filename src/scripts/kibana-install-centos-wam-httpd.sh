@@ -525,8 +525,8 @@ kibana_httpd_self_signed_cert()
         log "[kibana_httpd_self_signed_cert] Configure kibana for httpd reverse proxy using self signed ssl cert"
         bash httpdrevproxyselfsigned.sh -P 5601
         systemctl enable httpd
-        #assumes client node also using self signed cert
-        echo "elasticsearch.ssl.verify: false" >> /opt/kibana/config/kibana.yml
+        #assumes client node also using self signed cert, configuring if switching which port to connect to es on
+        echo "elasticsearch.ssl.verify: false" >> /etc/kibana/kibana.yml
     fi
 }
 
