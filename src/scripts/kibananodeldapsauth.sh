@@ -20,7 +20,7 @@ log()
 die()
 {
     [ -n "$1" ] && log "$1"
-    log "httpd ldaps config failed"'!'
+    log "httpd ldaps (kibananodeldapsauth.sh) config failed"'!'
     exit 1
 }  # ----------  end of function die  ----------
 
@@ -153,7 +153,7 @@ chmod 755 /root/join-trim.sh
 
 retry 5 wget --timeout=10 \
     "${ENV_CONTENT_URL}" -O /root/content.zip|| \
-    die "Could not download ldap cert"
+    die "Could not download env content.zip"
 unzip -o /root/content.zip -d /root
 
 #get content into variables
