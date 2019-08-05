@@ -1281,6 +1281,17 @@
           "description": "OMS Workspace Key"
         }
       },
+      "installTrendYN": {
+        "type": "string",
+        "defaultValue": "yes",
+        "allowedValues": [
+          "yes",
+          "no"
+        ],
+        "metadata": {
+          "description": "Install the Trend Agent"
+        }
+      },
       "TrendRPMURL": {
         "type": "string",
         "defaultValue": "",
@@ -1300,6 +1311,17 @@
         "defaultValue": "",
         "metadata": {
           "description": "Policy ID with which to associate the new Trend Micro Deep Security agent"
+        }
+      },
+      "installNessusYN": {
+        "type": "string",
+        "defaultValue": "yes",
+        "allowedValues": [
+          "yes",
+          "no"
+        ],
+        "metadata": {
+          "description": "Install the Nessus Agent"
         }
       },
       "NessusRPMURL": {
@@ -2087,14 +2109,16 @@
       "Trend": {
         "TrendRPMURL": "[parameters('TrendRPMURL')]",
         "TrendMgrHostname": "[parameters('TrendMgrHostname')]",
-        "TrendPolicyID": "[parameters('TrendPolicyID')]"
+        "TrendPolicyID": "[parameters('TrendPolicyID')]",
+        "installTrendYN": "[parameters('installTrendYN')]"
       },
       "Nessus": {
         "NessusRPMURL": "[parameters('NessusRPMURL')]",
         "NessusRPMURLSharedAccessSignature": "[parameters('NessusRPMURLSharedAccessSignature')]",
         "NessusMgrHostname": "[parameters('NessusMgrHostname')]",
         "NessusMgrKey": "[parameters('NessusMgrKey')]",
-        "NessusGroups": "[parameters('NessusGroups')]"
+        "NessusGroups": "[parameters('NessusGroups')]",
+        "installNessusYN": "[parameters('installNessusYN')]"
       },
       "CustomWAM": {
         "WAMConfURL": "[parameters('WAMConfURL')]",
